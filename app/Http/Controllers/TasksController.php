@@ -13,10 +13,13 @@ class TasksController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $limit = $request->limit;
+        $sort = $request->sort;
+        $order = $request->order;
 
-        $tasks = Task::where('user_id', auth()->user()->id)->get();
+        $tasks = Task::where('user_id', auth()->user()->id)->orderBy($sort, $order)->paginate($limit);
 
         foreach ($tasks as $task) {
             $timeAdded = $task->created_at->diffForHumans();
