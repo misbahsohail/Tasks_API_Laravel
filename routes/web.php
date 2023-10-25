@@ -26,6 +26,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::post('/task', [TasksController::class, 'store']);
+Route::get('/tasks', [TasksController::class, 'index']);
 
 
 
