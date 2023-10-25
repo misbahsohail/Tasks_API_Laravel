@@ -12,6 +12,17 @@ class TasksController extends Controller
     {
         $this->middleware(['auth']);
     }
+
+    public function index()
+    {
+
+        $tasks = Task::where('user_id', auth()->user()->id)->get();
+
+        foreach ($tasks as $task) {
+            $timeAdded = $task->created_at->diffForHumans();
+            echo "$task->body added at $timeAdded \n";
+        }
+    }
     public function store(Request $request)
     {
         $this->validate($request, [
