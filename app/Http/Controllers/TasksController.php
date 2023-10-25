@@ -20,7 +20,8 @@ class TasksController extends Controller
 
         foreach ($tasks as $task) {
             $timeAdded = $task->created_at->diffForHumans();
-            echo "$task->body added at $timeAdded \n";
+            $user = $task->user->name;
+            echo "$task->body added at $timeAdded by $user\n";
         }
     }
     public function store(Request $request)
